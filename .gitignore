@@ -1,0 +1,5 @@
+# Ignore hidden folders
+.*
+
+# Include .gitignore
+!.gitignore
