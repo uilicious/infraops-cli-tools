@@ -51,8 +51,8 @@ chmod +x "$RANCHER_CLI_BIN"
 # See: https://github.com/rancher/rancher/issues/15195
 if [ -d "$RANCHER_HOME" ]; then
 	# Execute with custom home dir
-	HOME="$RANCHER_HOME" "$RANCHER_CLI_BIN" $@
+	HOME="$RANCHER_HOME" "$RANCHER_CLI_BIN" "$@"
 else
 	# Execute directly
-	HOME="$SCRIPT_DIR" "$RANCHER_CLI_BIN" $@
+	HOME="$SCRIPT_DIR" "$RANCHER_CLI_BIN" "$@"
 fi

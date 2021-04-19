@@ -65,4 +65,4 @@ fi
 chmod +x "$CLI_BIN_PATH"
 
 # Execute the file respectively
-"$CLI_BIN_PATH" $@
+"$CLI_BIN_PATH" "$@"
