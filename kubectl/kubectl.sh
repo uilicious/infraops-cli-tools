@@ -42,4 +42,4 @@ fi
 chmod +x "$KUBECTL_BIN"
 
 # Execute the file respectively
-"$KUBECTL_BIN" "$@"
+"$KUBECTL_BIN" "${@}"
