@@ -54,12 +54,12 @@ if [ "$UNAME_A" == *"Darwin"* ]; then
 	OS_PLATFORM="darwin"
     OS_ARCH="amd64"
     FILE_SUFFIX=".tgz"
-elif [ "$UNAME_A" == *"Linux"* ]; then
-    # Do something under GNU/Linux platform
-elif [ "$UNAME_A" == *"MINGW32_NT"* ]; then
-    # Do something under 32 bits Windows NT platform
-elif [ "$UNAME_A" == *"MINGW64_NT"* ]; then
-    # Do something under 64 bits Windows NT platform
+# elif [ "$UNAME_A" == *"Linux"* ]; then
+#     # Do something under GNU/Linux platform
+# elif [ "$UNAME_A" == *"MINGW32_NT"* ]; then
+#     # Do something under 32 bits Windows NT platform
+# elif [ "$UNAME_A" == *"MINGW64_NT"* ]; then
+#     # Do something under 64 bits Windows NT platform
 fi
 
 # Ensure the dir exists
