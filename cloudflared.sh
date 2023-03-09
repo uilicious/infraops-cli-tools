@@ -17,7 +17,7 @@ PKG_NAME="cloudflared"
 
 # Configure the default version
 if [ -z "$CLOUDFLARED_VERSION" ]; then
-	BIN_VERSION="2022.9.0"
+	BIN_VERSION="2023.3.0"
 fi
 
 # Remove any `v` prefix if found
@@ -37,19 +37,23 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Get the full uname -a
 UNAME_A="$(uname -a)"
 
-# Lets detect linux or mac os platform
-OS_PLATFORM="linux"
-
 # Lets detet the architecture
 OS_ARCH="amd64"
 if [ "$UNAME_A" == *"arm64"* ]; then
 	OS_ARCH="arm64"
 fi
 
+# File suffix to use, assume "" by default
+FILE_SUFFIX=""
+
+# Lets detect linux or mac os platform
+OS_PLATFORM="linux"
+
 if [ "$UNAME_A" == *"Darwin"* ]; then
     # Use the darwin x64 build, for the macos environment
 	OS_PLATFORM="darwin"
     OS_ARCH="amd64"
+    FILE_SUFFIX=".tgz"
 elif [ "$UNAME_A" == *"Linux"* ]; then
     # Do something under GNU/Linux platform
 elif [ "$UNAME_A" == *"MINGW32_NT"* ]; then
@@ -65,7 +69,7 @@ if [ ! -d "$BIN_DIR" ]; then
 fi
 
 # Prepare the download URL
-BIN_PKG_URL="https://github.com/cloudflare/cloudflared/releases/download/$BIN_VERSION/$PKG_NAME-$OS_PLATFORM-$OS_ARCH"
+BIN_PKG_URL="https://github.com/cloudflare/cloudflared/releases/download/$BIN_VERSION/$PKG_NAME-$OS_PLATFORM-$OS_ARCH$FILE_SUFFIX"
 
 # Ensure the executable file exists
 BIN_FILE="$BIN_DIR/cloudflared"
@@ -81,7 +85,9 @@ if [ ! -f "$BIN_FILE" ]; then
     curl -LO "$BIN_PKG_URL"
 
     # Unzip / untar
-	# tar -zxvf $PKG_NAME-$OS_PLATFORM-$OS_ARCH.tar.gz
+    if [ "$FILE_SUFFIX" == ".tgz" ]; then
+	    tar -zxvf $PKG_NAME-$OS_PLATFORM-$OS_ARCH.tgz
+    fi
 
     # Rename the binary file
     mv $PKG_NAME-$OS_PLATFORM-$OS_ARCH $PKG_NAME
