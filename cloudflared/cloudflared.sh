@@ -17,7 +17,9 @@ PKG_NAME="cloudflared"
 
 # Configure the default version
 if [ -z "$CLOUDFLARED_VERSION" ]; then
-	BIN_VERSION="2023.3.0"
+	BIN_VERSION="2023.10.0"
+else
+    BIN_VERSION="${CLOUDFLARED_VERSION}"
 fi
 
 # Remove any `v` prefix if found
@@ -49,13 +51,16 @@ FILE_SUFFIX=""
 # Lets detect linux or mac os platform
 OS_PLATFORM="linux"
 
-if [ "$UNAME_A" == *"Darwin"* ]; then
+if [ "$(uname)" == "Darwin" ]; then
     # Use the darwin x64 build, for the macos environment
 	OS_PLATFORM="darwin"
     OS_ARCH="amd64"
     FILE_SUFFIX=".tgz"
 # elif [ "$UNAME_A" == *"Linux"* ]; then
 #     # Do something under GNU/Linux platform
+#     OS_PLATFORM="linux"
+#     OS_ARCH="amd64"
+#     FILE_SUFFIX=""
 # elif [ "$UNAME_A" == *"MINGW32_NT"* ]; then
 #     # Do something under 32 bits Windows NT platform
 # elif [ "$UNAME_A" == *"MINGW64_NT"* ]; then
@@ -90,7 +95,7 @@ if [ ! -f "$BIN_FILE" ]; then
     fi
 
     # Rename the binary file
-    mv $PKG_NAME-$OS_PLATFORM-$OS_ARCH $PKG_NAME
+    # mv $PKG_NAME-$OS_PLATFORM-$OS_ARCH $PKG_NAME
 
     # Reset to working dir
     cd "$CUR_WRK_DIR"
